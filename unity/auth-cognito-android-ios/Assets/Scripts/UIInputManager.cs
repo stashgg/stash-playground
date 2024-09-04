@@ -91,11 +91,9 @@ public class UIInputManager : MonoBehaviour
       LoginSignupButton.onClick.AddListener(onLoginClicked);
       StartButton.onClick.AddListener(onStartClick);
       LogoutButton.onClick.AddListener(onLogoutClick);
-
-#if UNITY_EDITOR
+      
       // WARNING: For development and testing of the code exchange. Enabled only for editor mode.
       urlWithCodeButton.onClick.AddListener(onCodeClick);
-#endif
    }
 
    void Awake()
@@ -110,14 +108,9 @@ public class UIInputManager : MonoBehaviour
 
       _authenticationManager = FindObjectOfType<AuthenticationManager>();
 
-#if !UNITY_EDITOR
-      // WARNING: For development and testing of the code exchange. Hide these when NOT in editor mode.
-      urlWithCodeButton.gameObject.SetActive(false);
-      urlWithCodeField.gameObject.SetActive(false);
-#endif
-   }
 
-#if UNITY_EDITOR
+   }
+   
    // WARNING: For development and testing of the code exchange. Enabled only for editor mode.
    private void onCodeClick()
    {
@@ -126,5 +119,5 @@ public class UIInputManager : MonoBehaviour
          ProcessDeepLink(urlWithCodeField.text);
       }
    }
-#endif
+
 }

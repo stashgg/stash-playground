@@ -1,16 +1,19 @@
+using System;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
 using System.Threading.Tasks;
+using Random = UnityEngine.Random;
+
 
 public class AuthenticationManager : MonoBehaviour
 {
    public static string CachePath;
-
+   
    // In production, should probably keep these in a config file
-   private const string AppClientID = "1bmabef3vpf9tt1d4k24ppba4b"; // App client ID, found under App Client Settings
-   private const string AppClientSecret = "job18pth6rvii1ug1bshul2rcrsm8uu95s6t39h521j2gksddr6"; 
+   private const string AppClientID = "1cvcpanmc6nhash0q0hed6lnvh"; // App client ID, found under App Client Settings
    private const string AuthCognitoDomainPrefix = "drive2survive"; // Found under App Integration -> Domain Name. Changing this means it must be updated in all linked Social providers redirect and javascript origins
-   private const string RedirectUrl = "cognitocallback://";
+   private const string RedirectUrl = "http://localhost";
    private const string Region = "eu-north-1"; // Update with the AWS Region that contains your services
 
    private const string AuthCodeGrantType = "authorization_code";
@@ -19,6 +22,10 @@ public class AuthenticationManager : MonoBehaviour
    private const string TokenEndpointPath = "/oauth2/token";
 
    private static string _userid = "";
+   
+   private static string _codeChallenge;
+   private static string _codeVerifier;
+   private static string _state;
 
    public async Task<bool> ExchangeAuthCodeForAccessToken(string rawUrlWithGrantCode)
    {
@@ -55,7 +62,7 @@ public class AuthenticationManager : MonoBehaviour
       WWWForm form = new WWWForm();
       form.AddField("grant_type", AuthCodeGrantType);
       form.AddField("client_id", AppClientID);
-      form.AddField("client_secret", AppClientSecret);
+      form.AddField("code_verifier", _codeVerifier);
       form.AddField("code", grantCode);
       form.AddField("redirect_uri", RedirectUrl);
 
@@ -107,7 +114,6 @@ public class AuthenticationManager : MonoBehaviour
          WWWForm form = new WWWForm();
          form.AddField("grant_type", RefreshTokenGrantType);
          form.AddField("client_id", AppClientID);
-         form.AddField("client_secret", AppClientSecret);
          form.AddField("refresh_token", userSessionCache._refreshToken);
 
          UnityWebRequest webRequest = UnityWebRequest.Post(refreshTokenUrl, form);
@@ -160,7 +166,6 @@ public class AuthenticationManager : MonoBehaviour
 
          WWWForm form = new WWWForm();
          form.AddField("client_id", AppClientID);
-         form.AddField("client_secret", AppClientSecret);
          form.AddField("token", userSessionCache._refreshToken);
 
          UnityWebRequest webRequest = UnityWebRequest.Post(revokeTokenEndpoint, form);
@@ -198,19 +203,7 @@ public class AuthenticationManager : MonoBehaviour
       UserSessionCache userSessionCache = new UserSessionCache();
       SaveDataManager.SaveJsonData(userSessionCache);
    }
-
-   public string GetUsersId()
-   {
-      // Debug.Log("GetUserId: [" + _userid + "]");
-      if (_userid == null || _userid == "")
-      {
-         // load userid from cached session 
-         UserSessionCache userSessionCache = new UserSessionCache();
-         SaveDataManager.LoadJsonData(userSessionCache);
-         _userid = userSessionCache.getUserId();
-      }
-      return _userid;
-   }
+   
 
    public string GetIdToken()
    {
@@ -218,26 +211,43 @@ public class AuthenticationManager : MonoBehaviour
       SaveDataManager.LoadJsonData(userSessionCache);
       return userSessionCache.getIdToken();
    }
-
-   public string GetUserId()
+   
+   public void GenerateCodeChallenge()
    {
-      UserSessionCache userSessionCache = new UserSessionCache();
-      SaveDataManager.LoadJsonData(userSessionCache);
-      return userSessionCache.getUserId();
+      //Generate code challenge and verifier
+      var(challenge, verifier) = Pkce.Generate();
+      _codeChallenge = challenge;
+      _codeVerifier = verifier;
+      
+      //Generate random State
+      _state = CreateRandomString(8);
    }
-
+   
    public string GetLoginUrl()
    {
-      // DOCS: https://docs.aws.amazon.com/cognito/latest/developerguide/login-endpoint.html
+      //Generate code challenge+verifier and random state.
+      GenerateCodeChallenge();
       string loginUrl = "https://" + AuthCognitoDomainPrefix + CognitoAuthUrl
-         + "/login?response_type=code&client_id="
-         + AppClientID + "&redirect_uri=" + RedirectUrl;
+         + "/oauth2/authorize?response_type=code&client_id=" + AppClientID + 
+         "&redirect_uri=" + RedirectUrl + 
+         "&state=" + _state +
+         "&code_challenge_method=S256&code_challenge=" + _codeChallenge;
       return loginUrl;
+      //TODO: Desktop app can start pooling...
    }
 
    void Awake()
    {
       CachePath = Application.persistentDataPath;
-      // Debug.Log("CachePath: " + CachePath);
+   }
+   
+   private string CreateRandomString(int stringLength = 10) {
+      int _stringLength = stringLength - 1;
+      string randomString = "";
+      string[] characters = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+      for (int i = 0; i <= _stringLength; i++) {
+         randomString = randomString + characters[Random.Range(0, characters.Length)];
+      }
+      return randomString;
    }
 }
