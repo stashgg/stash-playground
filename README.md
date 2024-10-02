@@ -10,7 +10,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo_horizontal_black.png" alt="Logo" width="80" height="80">
+    <img src="images/logo_horizontal_yellow.png" alt="Logo" width="1038" height="163">
   </a>
 
   <h3 align="center">Stash Playground</h3>
