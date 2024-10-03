@@ -1,17 +1,20 @@
 <a id="readme-top"></a>
 
+<br />
+<div align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="images/logo_horizontal_yellow.png" alt="Logo" width="1038" height="163">
+  </a>
+
+<br />
+<br />
+
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![YouTube][youtube-shield]][youtube-url]
-
-<br />
-<div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo_horizontal_yellow.png" alt="Logo" width="1038" height="163">
-  </a>
 
   <h3 align="center">Stash Playground</h3>
 
@@ -30,13 +33,18 @@
     <a href="https://www.linkedin.com/company/stashgg/">LinkedIn</a>
 </div>
 
+> [!IMPORTANT]
+> This repo is currently being built out.
+
 ## About the Stash Playground
 
-This repo contains various framework examples you can use with Stash. There are frontend, backend, and game SDK examples. Stash regularly adds to and updates this repo. If you have any issues with a code example, or want to see other examples, please let us know!
+This repo contains various framework examples you can use with Stash. There are frontend, backend, and game SDK examples. Stash regularly adds to and updates this repo. If you have any issues with a code example, or want to see other examples, please let us know.
 
-## How to use the Stash Plaground
+We have a prioritized set of frameworks that we've created examples for. It's difficult maintaining examples for every framework, so we've narrow the scope so that we can provide quality examples for popular frameworks. If you think there's something critical missing from these examples, let us know and we'll look into adding it.
 
-Each section in this repo has its own ReadMe. They provide general information about the examples, prerequisites, etc. You can clone the entire repo or copy and paste examples as needed.
+## How to use this repo
+
+Start by picking a set of examples you're interested in. Within each section is a ReadMe with instructions. It contains general information about the examples, prerequisites, etc. You can clone the entire repo or copy and paste examples as needed.
 
 ## SDK examples
 
@@ -44,11 +52,11 @@ Stash provides Unity and Unreal SDKs for working with our APIs. This means you c
 
 ## Backend examples
 
-Some Stash integrations require you to build backend APIs. These are often for approving and processing purchases. The backend examples cover different frameworks for building these APIs and integrating with Stash. It's possible you have related logic in place already.
+Some Stash integrations require you to build APIs into your backend. These are often used to notify Stash that we can charge a player, or for you to grant players purchased products. The backend examples cover different frameworks for building these APIs and integrating with Stash. It's possible you have related logic in place already.
 
 ## Frontend examples
 
-Need help with this section
+These examples illustrate how to use different frontend frameworks with Stash's APIs. This includes creating checkout links, linking player accounts, and more.
 
 ## License
 
