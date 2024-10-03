@@ -40,7 +40,7 @@
 
 This repo contains various framework examples you can use with Stash. There are frontend, backend, and game SDK examples. Stash regularly adds to and updates this repo. If you have any issues with a code example, or want to see other examples, please let us know.
 
-We have a prioritized set of frameworks that we've created examples for. It's difficult maintaining examples for every framework, so we've narrow the scope so that we can provide quality examples for popular frameworks. If you think there's something critical missing from these examples, let us know and we'll look into adding it.
+We have a prioritized set of frameworks that we've created examples for. It's difficult maintaining examples for every framework, so we've narrowed the scope so that we can provide quality examples for popular frameworks. If you think there's something critical missing from these examples, let us know and we'll look into adding it.
 
 ## How to use this repo
 
@@ -52,7 +52,7 @@ Stash provides Unity and Unreal SDKs for working with our APIs. This means you c
 
 ## Backend examples
 
-Some Stash integrations require you to build APIs into your backend. These are often used to notify Stash that we can charge a player, or for you to grant players purchased products. The backend examples cover different frameworks for building these APIs and integrating with Stash. It's possible you have related logic in place already.
+Some Stash integrations require you to build APIs into your backend. These are often used to notify Stash so that we can charge a player, or for you to grant players purchased products. The backend examples cover different frameworks for building these APIs and integrating with Stash. It's possible you have related logic in place already.
 
 ## Frontend examples
 
