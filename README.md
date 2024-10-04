@@ -44,7 +44,7 @@ We have a prioritized set of frameworks that we've created examples for. It's di
 
 ## How to use this repo
 
-Start by picking a set of examples you're interested in. Within each section is a ReadMe with instructions. It contains general information about the examples, prerequisites, etc. You can clone the entire repo or copy and paste examples as needed.
+Start by cloning the repo `git clone https://github.com/stashgg/stash-playground.git` and picking a set of examples you're interested in. Within each section is a ReadMe with instructions. It contains general information about the examples, prerequisites, etc.
 
 ## SDK examples
 
