@@ -1,16 +1,16 @@
 ## Get started
 
-To use these examples, make sure you have Node.js and Express.js. After that, clone this repo or copy the contents of this folder and run:
+To use this example, make sure you have Node.js and Express.js installed. After that, clone this repo or copy the contents of this folder and run:
 
 ```bash
 npm init -y
 ```
 
-This creates and activates a virtual environment with all the requirements needed to run the examples.
+This initializes the project and creates a `package.json` file.
 
 ## `authorize-purchases.js`
 
-This is an example endpoint you'd add to your backend to authorize Stash to complete purchases. During the purchase process, Stash verifies whether the player has enough funds to cover the purchase and then calls this endpoint. This allows you to do your own verification in regard to player eligibility. If you authorize the purchase, Stash continues with the payment flow. There's a [guide](https://docs.stash.gg/docs/create-purchase-authorization-endpoint) in our docs for building this endpoint, as well as a [specifications](https://docs.stash.gg/docs/pay-authorize-purchase-specifications) page with more details.
+This is an example endpoint you'd add to your backend to authorize Stash to complete purchases. During the purchase process, Stash verifies whether the player has enough funds to cover the purchase and then calls this endpoint. This allows you to do your own verification in regard to player eligibility. If you authorize the purchase, Stash continues with the payment flow. The [specifications](https://docs.stash.gg/docs/pay-authorize-purchase-specifications) page has more information about defining this endpoint.
 
 To try this example, run `node authorize_purchases.js` and then use curl to test:
 
